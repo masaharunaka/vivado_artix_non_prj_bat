@@ -8,6 +8,7 @@ set_property board_part digilentinc.com:arty:part0:1.1 [current_project]
 source "../../src/mb/bd/arty_mb.tcl"
 
 add_files ../../src/mb/wrapper/arty_mb_wrapper.v
+add_files ../../src/top/arty_mb_top.v
 
 # import library
 # set_property library bftLib [get_files  {../../Sources/hdl/bftLib/round_4.vhdl ../../Sources/hdl/bftLib/round_3.vhdl ../../Sources/hdl/bftLib/round_2.vhdl ../../Sources/hdl/bftLib/round_1.vhdl ../../Sources/hdl/bftLib/core_transform.vhdl ../../Sources/hdl/bftLib/bft_package.vhdl}]
