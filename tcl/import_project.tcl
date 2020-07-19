@@ -7,6 +7,8 @@ source "../../src/mb/bd/arty_mb.tcl"
 
 add_files ../../src/mb/wrapper/arty_mb_wrapper.v
 add_files ../../src/top/arty_mb_top.v
+add_files ../../src/common/counter.v
+add_files ../../src/io_delay/io_delay_module.v
 
 # import library
 

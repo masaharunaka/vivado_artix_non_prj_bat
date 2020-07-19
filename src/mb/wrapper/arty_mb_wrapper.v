@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-//Date        : Thu Jun 13 21:25:19 2019
+//Date        : Sun Jul 19 14:49:56 2020
 //Host        : DESKTOP-40DR8BJ running 64-bit major release  (build 9200)
 //Command     : generate_target arty_mb_wrapper.bd
 //Design      : arty_mb_wrapper
@@ -12,6 +12,11 @@
 module arty_mb_wrapper
    (IIC_scl_io,
     IIC_sda_io,
+    clk_out2,
+    gpio02_1_i,
+    gpio02_1_o,
+    gpio02_2_i,
+    gpio02_2_o,
     led_4bits,
     push_buttons_4bits,
     reset,
@@ -21,6 +26,11 @@ module arty_mb_wrapper
     usb_uart_txd);
   inout IIC_scl_io;
   inout IIC_sda_io;
+  output clk_out2;
+  input [31:0]gpio02_1_i;
+  output [31:0]gpio02_1_o;
+  input [31:0]gpio02_2_i;
+  output [31:0]gpio02_2_o;
   output [3:0]led_4bits;
   input [3:0]push_buttons_4bits;
   input reset;
@@ -37,6 +47,11 @@ module arty_mb_wrapper
   wire IIC_sda_io;
   wire IIC_sda_o;
   wire IIC_sda_t;
+  wire clk_out2;
+  wire [31:0]gpio02_1_i;
+  wire [31:0]gpio02_1_o;
+  wire [31:0]gpio02_2_i;
+  wire [31:0]gpio02_2_o;
   wire [3:0]led_4bits;
   wire [3:0]push_buttons_4bits;
   wire reset;
@@ -62,6 +77,11 @@ module arty_mb_wrapper
         .IIC_sda_i(IIC_sda_i),
         .IIC_sda_o(IIC_sda_o),
         .IIC_sda_t(IIC_sda_t),
+        .clk_out2(clk_out2),
+        .gpio02_1_i(gpio02_1_i),
+        .gpio02_1_o(gpio02_1_o),
+        .gpio02_2_i(gpio02_2_i),
+        .gpio02_2_o(gpio02_2_o),
         .led_4bits(led_4bits),
         .push_buttons_4bits(push_buttons_4bits),
         .reset(reset),
