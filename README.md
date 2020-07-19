@@ -1,2 +1,3 @@
 # vivado_artix_non_prj_bat
-vivado2018.1 non project mode that excuted by bat file.
+Tool:vivado2018.1 
+Description:non project mode that excuted by bat file.
