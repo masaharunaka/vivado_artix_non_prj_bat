@@ -130,5 +130,20 @@ assign sig_o[3]     = ~(sig_i[6] & sig_i[7]) ;
 assign sig_i[7:0]   = sig_in[7:0]            ;
 assign sig_out[7:0] = sig_o[7:0]             ;
 assign iic_pup[1:0] = {2{1'b1}}              ;
+
+//----------------
+//-- Debug Core --
+//----------------
+ila_0 ila_0_inst(
+   .clk     ( clk_io_ref      ) //input         clk     ;
+  ,.probe0  ( sig_gpio02_1_o  ) //input [31:0]  probe0  ;
+  ,.probe1  ( sig_gpio02_2_o  ) //input [31:0]  probe1  ;
+  ,.probe2  ( {11'd0,sig_cnt} ) //input [15:0]  probe2  ;
+  ,.probe3  ( {16{1'b0}}      ) //input [15:0]  probe3  ;
+  ,.probe4  ( sig_test_trg    ) //input [0:0]   probe4  ;
+  ,.probe5  ( hp_out[0]       ) //input [0:0]   probe5  ;
+  ,.probe6  ( hp_out[1]       ) //input [0:0]   probe6  ;
+  ,.probe7  ( hp_out[2]       ) //input [0:0]   probe7  ;
+);
 //---------------
 endmodule
