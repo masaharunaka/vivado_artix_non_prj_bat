@@ -10,7 +10,7 @@ module arty_mb_top
 (
    output [3:0] led_4bits
   ,input  [3:0] push_buttons_4bits
-  ,input        reset
+  ,input        resetb
   ,output [7:0] hp_out
   ,output [7:0] sig_out
   ,input  [7:0] sig_in
@@ -24,7 +24,7 @@ module arty_mb_top
 
   wire  [3:0] led_4bits_io       ;
   wire  [3:0] push_buttons_4bits ;
-  wire        reset              ;
+  wire        resetb             ;
   wire        clk_io_ref         ;//200MHz
   wire  [7:0] sig_o              ;
   wire  [7:0] sig_i              ;
@@ -49,7 +49,7 @@ module arty_mb_top
   arty_mb_wrapper arty_mb_wrapper_i
     (.led_4bits          (led_4bits_io      ),
      .push_buttons_4bits (push_buttons_4bits),
-     .reset              (reset             ),
+     .reset              (resetb            ),// inverted reset port 
      .sig_out            (sig_o[7:4]        ),
      .sys_clock          (sys_clock         ),
      .clk_out2           (clk_io_ref        ),
@@ -71,26 +71,26 @@ assign led_4bits[3:0]        = led_4bits_io[3:0]    ;
 //------------------------------
 
   io_delay_module io_delay_module_i
-    (.rst                   (reset                 ),
+    (.rst                   (~resetb               ),
      .clk                   (clk_io_ref            ),
-     .rst_reg               (reset                 ),
+     .rst_reg               (~resetb               ),
      .rdy                   (                      ),
      .di_01                 (sig_test_trg          ),
      .do_01                 (hp_out[1]             ),
      .ldcnt_01              (sig_gpio02_1_o[5]     ),
      .dicnt_01              (sig_gpio02_1_o[4:0]   ),
      .docnt_01              (sig_gpio02_1_i[4:0]   ),
-     .di_02                 (sig_test_trg          ),
+     .di_02                 (hp_out[1]             ),
      .do_02                 (hp_out[2]             ),
      .ldcnt_02              (sig_gpio02_1_o[13]    ),
      .dicnt_02              (sig_gpio02_1_o[12:8]  ),
      .docnt_02              (sig_gpio02_1_i[12:8]  ),
-     .di_03                 (sig_test_trg          ),
+     .di_03                 (hp_out[2]             ),
      .do_03                 (hp_out[3]             ),
      .ldcnt_03              (sig_gpio02_1_o[21]    ),
      .dicnt_03              (sig_gpio02_1_o[20:16] ),
      .docnt_03              (sig_gpio02_1_i[20:16] ),
-     .di_04                 (sig_test_trg          ),
+     .di_04                 (hp_out[3]             ),
      .do_04                 (hp_out[4]             ),
      .ldcnt_04              (sig_gpio02_1_o[29]    ),
      .dicnt_04              (sig_gpio02_1_o[28:24] ),
@@ -110,7 +110,7 @@ assign  hp_out[7:5]  = 3'b000           ;
 
 defparam counter_inst.COUNT_WIDTH = 5;
 COUNTER counter_inst(
-         .rst        (reset      )     
+         .rst        (~resetb     )     
         ,.clk        (clk_io_ref )     
         ,.clr        (1'b0       )     
         ,.en         (1'b1       )     
@@ -141,9 +141,9 @@ ila_0 ila_0_inst(
   ,.probe2  ( {11'd0,sig_cnt} ) //input [15:0]  probe2  ;
   ,.probe3  ( {16{1'b0}}      ) //input [15:0]  probe3  ;
   ,.probe4  ( sig_test_trg    ) //input [0:0]   probe4  ;
-  ,.probe5  ( hp_out[0]       ) //input [0:0]   probe5  ;
-  ,.probe6  ( hp_out[1]       ) //input [0:0]   probe6  ;
-  ,.probe7  ( hp_out[2]       ) //input [0:0]   probe7  ;
+  ,.probe5  ( hp_out[1]       ) //input [0:0]   probe5  ;
+  ,.probe6  ( hp_out[3]       ) //input [0:0]   probe6  ;
+  ,.probe7  ( hp_out[4]       ) //input [0:0]   probe7  ;
 );
 //---------------
 endmodule
